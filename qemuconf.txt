@@ -1,0 +1,172 @@
+sudo debootstrap --foreign --arch=i386 bionic ./chroot-bionic-i386 http://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+sudo mount -t sysfs sys ./chroot-bionic-i386/sys/
+sudo mount -t proc proc ./chroot-bionic-i386/proc/
+sudo mount --bind /dev ./chroot-bionic-i386/dev/
+sudo mount --bind /dev/pts ./chroot-bionic-i386/dev/pts/
+sudo mount --bind /dev/shm ./chroot-bionic-i386/dev/shm/
+sudo cp /usr/bin/qemu-i386-static ./chroot-bionic-i386/usr/bin/
+sudo chroot ./chroot-bionic-i386/ /debootstrap/debootstrap --second-stage
+
+sudo debootstrap --foreign --arch=i386 xenial ./chroot-xenial-i386 http://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+sudo mount -t sysfs sys ./chroot-xenial-i386/sys/
+sudo mount -t proc proc ./chroot-xenial-i386/proc/
+sudo mount --bind /dev ./chroot-xenial-i386/dev/
+sudo mount --bind /dev/pts ./chroot-xenial-i386/dev/pts/
+sudo mount --bind /dev/shm ./chroot-xenial-i386/dev/shm/
+sudo cp /usr/bin/qemu-i386-static ./chroot-xenial-i386/usr/bin/
+sudo chroot ./chroot-xenial-i386/ /debootstrap/debootstrap --second-stage
+
+sudo debootstrap --foreign --arch=i386 stretch ./chroot-stretch-i386 http://mirrors.tuna.tsinghua.edu.cn/debian/
+sudo mount -t sysfs sys ./chroot-stretch-i386/sys/
+sudo mount -t proc proc ./chroot-stretch-i386/proc/
+sudo mount --bind /dev ./chroot-stretch-i386/dev/
+sudo mount --bind /dev/pts ./chroot-stretch-i386/dev/pts/
+sudo mount --bind /dev/shm ./chroot-stretch-i386/dev/shm/
+sudo cp /usr/bin/qemu-i386-static ./chroot-stretch-i386/usr/bin/
+sudo chroot ./chroot-stretch-i386/ /debootstrap/debootstrap --second-stage
+
+sudo debootstrap --foreign --arch=amd64 stretch ./chroot-stretch-amd64 http://mirrors.tuna.tsinghua.edu.cn/debian/
+sudo mount -t sysfs sys ./chroot-stretch-amd64/sys/
+sudo mount -t proc proc ./chroot-stretch-amd64/proc/
+sudo mount --bind /dev ./chroot-stretch-amd64/dev/
+sudo mount --bind /dev/pts ./chroot-stretch-amd64/dev/pts/
+sudo mount --bind /dev/shm ./chroot-stretch-amd64/dev/shm/
+sudo cp /usr/bin/qemu-x86_64-static ./chroot-stretch-amd64/usr/bin/
+sudo chroot ./chroot-stretch-amd64/ /debootstrap/debootstrap --second-stage
+
+sudo debootstrap --foreign --arch=i386 bullseye ./debian-bullseye-i386 http://mirrors.tuna.tsinghua.edu.cn/debian/
+sudo mount -t sysfs sys ./debian-bullseye-i386/sys/
+sudo mount -t proc proc ./debian-bullseye-i386/proc/
+sudo mount --bind /dev ./debian-bullseye-i386/dev/
+sudo mount --bind /dev/pts ./debian-bullseye-i386/dev/pts/
+sudo mount --bind /dev/shm ./debian-bullseye-i386/dev/shm/
+sudo cp /usr/bin/qemu-i386-static ./debian-bullseye-i386/usr/bin/
+sudo chroot ./debian-bullseye-i386/ /debootstrap/debootstrap --second-stage
+sudo chroot /home/greatwall/debian-bullseye-i386/ /bin/su -l root
+
+
+export LANGUAGE="C"
+export LC_ALL="C"
+export DISPLAY=:0
+
+
+#deb http://mirrors.tuna.tsinghua.edu.cn/debian bullseye main
+#deb https://mirrors.ustc.edu.cn/debian/ bullseye main
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+
+
+[root]
+apt install wine
+apt install git
+apt install wget
+apt install zenity
+apt install cabextract
+apt install libcanberra-gtk-module
+apt install libcanberra-gtk*
+apt install locate
+
+git clone  https://github.com/novaspirit/winetricks.git
+cd winetricks
+make install
+
+WINARCH=win32 WINEPREFIX=/home/greatwall/.wineChat/ winecfg
+WINARCH=win32 WINEPREFIX=/home/greatwall/.wineChat/ winetricks
+[usr]
+
+winetricks riched20
+
+[q1]
+open WeChat.exe error:
+	MESA-LOADER: failed to retrieve device information
+	MESA-LOADER: failed to retrieve device information
+	005b:err:winediag:SECUR32_initNTLMSP ntlm_auth was not found or is 		outdated. Make sure that ntlm_auth >= 3.0.25 is in your path. Usually, 		you can find it in the winbind package of your distribution.
+
+	[solution] 
+	apt install winbind
+
+[q2]
+again,but exist error:
+	
+libGL error: MESA-LOADER: failed to retrieve device information
+MESA-LOADER: failed to retrieve device information
+MESA-LOADER: failed to retrieve device information
+[0728/063915:INFO:exception_record.cc(518)] [QB]Process ID: 8 Type: 1
+[0728/063915:ERROR:network_change_notifier_win.cc(156)] WSALookupServiceBegin failed with: 8
+
+	[solution] 
+	export LIBGL_DEBUG=verbose
+
+		libGL: using driver vmwgfx for 62
+		libGL: Can't open configuration file /etc/drirc: No such file or directory.
+		libGL: Can't open configuration file /home/greatwall/.drirc: No such file or directory.
+		libGL error: MESA-LOADER: failed to retrieve device information
+		
+		[solution]
+		copy /etc/drirc  to fileSystem:/etc/
+
+[1]
+	winetricks 
+	- all fonts
+
+[问题] wine client error:1d6654d: init_thread failed with status 1
+
+
+https://blog.csdn.net/Gerald_Jones/article/details/80781378
+
+[amd64]
+dpkg --add-architecture i386
+apt-get update
+apt-get install wine32
+
+		
+wget http://d1.music.126.net/dmusic/netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
+dpkg -i netease-cloud-music_1.2.1_amd64_ubuntu_20190428.deb
+
+apt install gconf2
+apt --fix-broken install
+
+apt-get install xorg xdg-utils  libappindicator3-1 libappindicator*
+
+apt install dbus-x11
+
+[q]
+greatwall@greatwall-GW-001M1A-FTF:~$  cocomusic 
+	qemu: uncaught target signal 5 (Trace/breakpoint trap) - core dumped
+	(cocomusic:16096): libappindicator-WARNING **: 09:52:21.633: Unable to get the session bus: Unknown or unsupported transport ?disabled? for address ?disabled:?
+	(cocomusic:16096): LIBDBUSMENU-GLIB-WARNING **: 09:52:21.640: Unable to get session bus: Unknown or unsupported transport ?disabled? for address ?disabled:?
+[s]
+	apt install chromium-driver
+	apt install libappindicator*  报错
+
+
+https://www.cnblogs.com/pengdonglin137/p/6431234.html
+
+python3-minimal (3.8.2-3)
+
+
+https://wiki.qemu.org/Hosts/Linux
+[Debian]
+apt-get install libnfs-dev libiscsi-dev
+
+qemu和bochs
+[AMD bionic]
+sudo debootstrap --foreign --arch=amd64 bionic ./chroot-bionic-amd64 http://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+sudo mount -t sysfs sys ./chroot-bionic-amd64/sys/
+sudo mount -t proc proc ./chroot-bionic-amd64/proc/
+sudo mount --bind /dev ./chroot-bionic-amd64/dev/
+sudo mount --bind /dev/pts ./chroot-bionic-amd64/dev/pts/
+sudo mount --bind /dev/shm ./chroot-bionic-amd64/dev/shm/
+sudo cp /usr/bin/qemu-i386-static ./chroot-bionic-amd64/usr/bin/
+sudo chroot ./chroot-bionic-amd64/ /debootstrap/debootstrap --second-stage
+sudo chroot ./chroot-bionic-amd64/ /bin/su -l root
+
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+
+

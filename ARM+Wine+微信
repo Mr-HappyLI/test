@@ -1,0 +1,90 @@
+一、构建X86文件系统
+【注意】需要最新的debootstrap和qemu-static，见deb安装包
+【步骤】
+$ mkdir wineEnv
+$ cd wineEnv
+$ sudo debootstrap --foreign --arch=i386 bullseye ./debian-bullseye-i386 http://mirrors.tuna.tsinghua.edu.cn/debian/
+$ sudo mount -t sysfs sys ./debian-bullseye-i386/sys/
+$ sudo mount -t proc proc ./debian-bullseye-i386/proc/
+$ sudo mount --bind /dev ./debian-bullseye-i386/dev/
+$ sudo mount --bind /dev/pts ./debian-bullseye-i386/dev/pts/
+$ sudo mount --bind /dev/shm ./debian-bullseye-i386/dev/shm/
+$ sudo cp /usr/bin/qemu-i386-static ./debian-bullseye-i386/usr/bin/
+$ sudo chroot ./debian-bullseye-i386/ /debootstrap/debootstrap --second-stage
+$ sudo chroot ./debian-bullseye-i386/ /bin/su -l root
+
+AMD64
+[先]
+编译 qemu
+
+
+sudo debootstrap --foreign --arch=amd64 bullseye ./debian-bullseye-amd64 http://mirrors.tuna.tsinghua.edu.cn/debian/
+sudo mount -t sysfs sys ./debian-bullseye-amd64/sys/
+sudo mount -t proc proc ./debian-bullseye-amd64/proc/
+sudo mount --bind /dev ./debian-bullseye-amd64/dev/
+sudo mount --bind /dev/pts ./debian-bullseye-amd64/dev/pts/
+sudo mount --bind /dev/shm ./debian-bullseye-amd64/dev/shm/
+sudo cp /usr/bin/qemu-x86_64-static ./debian-bullseye-amd64/usr/bin/
+sudo chroot ./debian-bullseye-amd64/ /debootstrap/debootstrap --second-stage
+sudo chroot ./debian-bullseye-amd64/ /bin/su -l root
+
+二、下载wine环境必备依赖库
+qemu 
+[root用户]
+apt install wine
+apt install git
+apt install wget
+apt install zenity
+apt install cabextract
+apt install libcanberra-gtk-module
+apt install libcanberra-gtk*
+apt install locate
+
+adduser -uid 1000 greatwall
+
+注意  先构建qemu环境，再去搞wine，经测试X86+ubuntu18.04 同样的方法微信可以运行
+https://blog.csdn.net/acingdreamer/article/details/53318422
+apt install locates
+dpkg-reconfigure locales
+apt-get install task-chinese-s
+
+
+
+https://gitmemory.com/issue/64studio/pdk-components-debian-testing/4/468478200
+
+The fix was to run the following commands (not in chroot -- on the real hardware):
+
+$ apt-get --reinstall install libgdk-pixbuf2.0-0
+$ update-mime-database /usr/share/mime
+
+apt install libmono-*
+
+
+
+/bin/sh: 1: Syntax error: EOF in backquote substitution
+W: removing assembly: * Assertion at mini-exceptions.c:3172, condition `sigaltstack (&sa, NULL) == 0' not met failed!
+
+Setting up libu2f-udev (1.1.10-1) ...
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring request.
+Running in chroot, ignoring reque
+
+不能运行谷歌浏览器
+The hardware on this system lacks support for the sse2 instruction set.
+The upstream chromium project no longer supports this configuration.
+For more information,please read and possibly provide input to their bug tracking system at http://crbug.com/348761.
+
+谷歌浏览器需要以下内容
+libappindicator3-1 libdbusmenu-gtk3-4 libindicator3-7 wget
+
+
+https://www.giantpockets.com/box86-run-x86-code-and-games-on-arm/   arm 运行x86软件
+
+https://www.giantpockets.com/box86-run-x86-code-and-games-on-arm/
+https://github.com/ptitSeb/box86
+

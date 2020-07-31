@@ -1,0 +1,20 @@
+sudo apt-get install python-software-properties
+sudo apt-get install software-properties-common
+https://blog.csdn.net/qq_36956154/article/details/100606619
+
+wine explorer /desktop=wechat, 1920x1080 /home/greatwall/.wine/drive_c/Program\ Files/Tencent/WeChat/WeChat.exe
+sudo tar -jcvf debian-bullseye-i386.tar.bz2 debian-bullseye-i386
+
+https://blog.csdn.net/uotail/article/details/90115210
+
+
+sudo apt-get install --reinstall xserver-xorg-video-intel libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-core
+
+export LIBGL_DEBUG=verbose 
+
+在Linux的缓存I/O机制中，操作系统会将I/O的数据缓存在文件系统的page cache中，数据会先被拷贝到page cache中，操作系统定时将page cache中的数据刷新到磁盘。
+
+wine
+wine-development wine
+
+

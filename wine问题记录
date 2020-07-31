@@ -1,0 +1,29 @@
+1. 运行程序时出现报错如下
+greatwall@greatwall-GW-001M1A-FTF:~$ winecfg 
+	wine: created the configuration directory '/home/greatwall/.wine'
+	0014:err:ole:marshal_object couldn't get IPSFactory buffer for interface {00000131-0000-0000-c000-000000000046}
+	0014:err:ole:marshal_object couldn't get IPSFactory buffer for interface {6d5140c1-7436-11ce-8034-00aa006009fa}
+	0014:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hres=0x80004002
+	0014:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, 80004002
+	0014:err:ole:get_local_server_stream Failed: 80004002
+	0012:err:ole:marshal_object couldn't get IPSFactory buffer for interface {00000131-0000-0000-c000-000000000046}
+	0012:err:ole:marshal_object couldn't get IPSFactory buffer for interface {6d5140c1-7436-11ce-8034-00aa006009fa}
+	0012:err:ole:StdMarshalImpl_MarshalInterface Failed to create ifstub, hres=0x80004002
+	0012:err:ole:CoMarshalInterface Failed to marshal the interface {6d5140c1-7436-11ce-8034-00aa006009fa}, 80004002
+	...
+
+【分析】
+	该软件需要wine32包，但是使用了wine64包。
+接下来我们在执行：三条命令
+第一条 dpkg --add-architecture i386
+第二条 apt-get update
+第三条apt-get install wine32
+
+
+
+    export WINEARCH=win32 WINEPREFIX=~/.wineoffice
+    winecfg    初始化新的32bit Arch wineprefix，并确认操作系统是Windows XP
+
+
+
+

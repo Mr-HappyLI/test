@@ -1,0 +1,93 @@
+git clone git://git.qemu.org/qemu.git
+apt-get build-deps qemu #安装开发库
+cd qemu
+./configure #如果喜欢，可以自己挑选具体要什么特性
+
+
+gtk2-*
+
+[q] ERROR: glib-2.48 gthread-2.0 is required to compile QEMU
+[s] sudo apt install libglib2.0-dev
+
+[q]ERROR: pixman >= 0.21.8 not present.
+          Please install the pixman devel package.
+[s]apt-get install libpixman-1-dev
+mono*
+make
+
+
+
+apt-get install software-properties-common python-software-properties
+
+
+
+git clone https://github.com/qemu/qemu.git
+mkdir build
+cd build/
+ ../configure --target-list=x86_64-linux-user --enable-debug --enable-kvm  --enable-vnc    --static
+
+../configure --target-list=x86_64-linux-user --enable-debug --enable-kvm  --enable-vnc    --static --disable-system --enable-linux-user
+
+make -j4
+
+
+http://blog.nsfocus.net/qemu-chroot/  经典教材
+
+https://www.qemu.org/docs/master/    qemu官方指导
+
+
+ futex(0x000000400863fc88,FUTEX_PRIVATE_FLAG|FUTEX_WAIT,0,NULL,NULL,0)6543 stat("/sys/fs/cgroup/cpuset/chrome",0x000000400d2ac7e0) = -1 errno=2 (No such file or directory)
+stat("/sys/fs/cgroup/schedtune/chrome",0x000000400d2ac7e0) = -1 errno=2 (No such file or directory)
+
+rt_sigaction(SIGKILL,NULL,0x000000400863f9d0) = -1 errno=22 (Invalid argument)
+
+stat("/sys/fs/cgroup/cpuset/chrome",0x000000400daad7e0) = -1 errno=2 (No such file or directory)
+stat("/sys/fs/cgroup/schedtune/chrome",0x000000400daad7e0) = -1 errno=2 (No such file or directory)
+
+recvmsg(28,0x400863f7a0,0) = -1 errno=11 (Resource temporarily unavailable)
+
+
+6543 access("/usr/share/gtk-3.0/settings.ini",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/etc/gtk-3.0/settings.ini",F_OK) = -1 errno=2 (No such file or directory)      -----*****
+6543 access("/etc/xdg/gtk-3.0/settings.ini",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.config/gtk-3.0/settings.ini",F_OK) = -1 errno=2 (No such file or directory)
+6543 futex(0x0000004008cb4f38,FUTEX_PRIVATE_FLAG|FUTEX_WAKE,2147483647,NULL,NULL,0) = 0
+6543 stat("/home/greatwall/.config/gtk-3.0/gtk.css",0x000000400863fad0) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.24/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.22/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.20/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.18/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.16/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.14/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.local/share/themes/kylin-black-theme/gtk-3.0/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.24/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.22/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.20/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.18/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.16/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.14/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/home/greatwall/.themes/kylin-black-theme/gtk-3.0/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.24/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.22/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.20/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.18/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.16/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.14/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/local/share/themes/kylin-black-theme/gtk-3.0/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.24/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.22/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.20/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.18/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.16/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.14/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.0/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.24/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.22/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.20/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.18/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.16/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.14/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+6543 access("/usr/share/themes/kylin-black-theme/gtk-3.0/gtk.css",F_OK) = -1 errno=2 (No such file or directory)
+
+
+
